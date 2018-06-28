@@ -15,12 +15,16 @@ import redis.clients.jedis.JedisPoolConfig;
 public class JedisTest {
 
     @Autowired
-    private Jedis jedis;
+    private JedisPool jedisPool;
+
+    private Jedis jedis(){
+        return jedisPool.getResource();
+    }
 
     @ResponseBody
     @RequestMapping("/key/{key}")
     public Object getKey(@PathVariable String key){
-        return jedis.get(key);
+        return jedis().get(key);
     }
 
     /*private final static String ip = "47.98.217.141";

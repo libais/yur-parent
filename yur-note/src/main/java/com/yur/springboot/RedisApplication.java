@@ -36,10 +36,10 @@ public class RedisApplication extends SpringBootServletInitializer {
     }
 
     @Bean
-    public Jedis jedis(JedisPoolConfig jedisPoolConifg){
+    public JedisPool jedisPool(JedisPoolConfig jedisPoolConifg){
         JedisPool jedisPool = new JedisPool(jedisPoolConifg,
                 ip, port, 3000, Crypto.decrypt(require, Crypto.KEY));
-        return jedisPool.getResource();
+        return jedisPool;
     }
 
 }
